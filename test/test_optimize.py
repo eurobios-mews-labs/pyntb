@@ -17,7 +17,7 @@
 
 import numpy as np
 
-from pydnt.optimize import bisect_v, fixed_point, qnewt2d_v
+from pyntb.optimize import bisect_v, fixed_point, qnewt2d_v
 
 
 def test_bisect():

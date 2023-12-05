@@ -18,7 +18,7 @@
 import numpy as np
 import pytest
 
-from pydnt.polynomial import solve_p2_v, _cardan_v, solve_p3_v
+from pyntb.polynomial import solve_p2_v, _cardan_v, solve_p3_v
 
 
 def _maxabs(x):
