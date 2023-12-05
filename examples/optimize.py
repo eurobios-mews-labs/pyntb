@@ -17,7 +17,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
-from pydnt.optimize import bisect_v, fixed_point, qnewt2d_v
+from pyntb.optimize import bisect_v, fixed_point, qnewt2d_v
 
 
 def example_bisect_v(n=10):
@@ -57,7 +57,7 @@ def example_fixed_point(n=8, put_nan=True):
     Here we try to find the fixed point of sin(x*c) where c is an array. We can
     choose to put a nan in the array, and in that case the call to the
     fixed_point from scipy.optimize will throw an error; the modified
-    fixed_point provided by pydnt correct this.
+    fixed_point provided by pyntb correct this.
     """
 
     c = 1 + np.sqrt(np.linspace(1, n, n))
@@ -74,7 +74,7 @@ def example_fixed_point(n=8, put_nan=True):
         x0 = fixed_point_scipy(fun, 0.5)
     except RuntimeError:
         print("Error in scipy (RuntimeError due to nans in input array), "
-              "using fixed_point from pydnt")
+              "using fixed_point from pyntb")
         x0 = fixed_point(fun, 0.5)
 
     plt.figure()
