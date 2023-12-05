@@ -19,8 +19,11 @@ import numpy as np
 
 from pyntb.optimize import bisect_v, fixed_point, qnewt2d_v
 
+_nprs = 3141592654
+
 
 def test_bisect():
+    np.random.seed(_nprs)
     size = 99
     tol = 1.0E-09
 
@@ -53,6 +56,7 @@ def test_fixed_point():
 
 
 def test_qnewt2d():
+    np.random.seed(_nprs)
     size = 99
     tol = 1.0E-12
 

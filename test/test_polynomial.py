@@ -20,6 +20,7 @@ import pytest
 
 from pyntb.polynomial import solve_p2_v, _cardan_v, solve_p3_v
 
+_nprs = 3141592654
 
 def _maxabs(x):
     return np.max(np.abs(x))
@@ -30,7 +31,8 @@ def sizetol():
     return 99, 1.0E-10
 
 
-def test_solve_p2_distinct_real_roots(sizetol):
+def    test_solve_p2_distinct_real_roots(sizetol):
+    np.random.seed(_nprs)
     size, tol = sizetol
 
     r1 = np.random.randn(size)
@@ -51,6 +53,7 @@ def test_solve_p2_distinct_real_roots(sizetol):
 
 
 def test_solve_p2_double_real_root(sizetol):
+    np.random.seed(_nprs)
     size, tol = sizetol
 
     rd = np.random.randn(size)
@@ -68,6 +71,7 @@ def test_solve_p2_double_real_root(sizetol):
 
 
 def test_solve_p2_complex_roots(sizetol):
+    np.random.seed(_nprs)
     size, tol = sizetol
 
     r1 = np.random.randn(size) + 1j * np.random.randn(size)
@@ -86,6 +90,7 @@ def test_solve_p2_complex_roots(sizetol):
 
 
 def test_solve_cardan(sizetol):
+    np.random.seed(_nprs)
     size, tol = sizetol
 
     p = np.random.randn(size)
@@ -103,6 +108,7 @@ def test_solve_cardan(sizetol):
 
 
 def test_solve_p3(sizetol):
+    np.random.seed(_nprs)
     size, tol = sizetol
 
     a = np.random.randn(size)
