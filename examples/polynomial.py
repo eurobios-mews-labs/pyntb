@@ -17,6 +17,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+
 from pyntb.polynomial import solve_p2_v, _cardan_v, solve_p3_v
 
 

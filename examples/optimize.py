@@ -17,6 +17,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+
 from pyntb.optimize import bisect_v, fixed_point, qnewt2d_v
 
 
