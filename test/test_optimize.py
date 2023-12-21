@@ -35,7 +35,7 @@ def test_bisect():
 
     r0 = np.sqrt(c)
 
-    x0, err = bisect_v(fun, 0., np.sqrt(np.max(c)) * 1.1, (size,), print_err=True,
+    x0, err = bisect_v(fun, 0., np.sqrt(np.max(c)) * 1.1, (size,), print_err=False,
                        tol=tol, maxiter=99)
 
     assert np.max(np.abs(x0 - r0) <= np.minimum(tol, err))
