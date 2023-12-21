@@ -8,6 +8,8 @@ To install the package, type ```python3 -m pip install pyntb``` in a terminal.
 
 ## Content
 
+- `geoutils`
+  - implementation of haversine distance which works on numpy arrays with an option to change the sphere radius
 - `optimize` 
   - a bisection algorithm that work on numpy array inputs
   - a copy of `scipy.optimize.fixed_point` that deals with nan values
