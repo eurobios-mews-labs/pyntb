@@ -41,6 +41,35 @@ def test_bisect():
     assert np.max(np.abs(x0 - r0) <= np.minimum(tol, err))
 
 
+def test_bisect_scalar():
+    def f(x):
+        return x**2 - 2
+
+    tol = 1e-6
+    x0, err = bisect_v(f, a=0, b=2, shape=1, tol=tol)
+    np.testing.assert_allclose(x0, np.sqrt(2), atol=tol)
+
+
+def test_bisect_vector():
+    def f(x):
+        return np.array([x[0]**2-2, x[1]**3-2])
+        # Not the best way to use bisect_v, but just for testing.
+
+    tol = 1e-6
+    x0, err = bisect_v(f, a=0, b=2, shape=(2,), tol=tol)
+    np.testing.assert_allclose(x0, np.array([np.sqrt(2), np.cbrt(2)]), atol=tol)
+
+
+def test_bisect_array():
+    c = np.arange(27).reshape(3, 3, 3)
+    def f(x):
+        return x**2 - c
+
+    tol = 1e-6
+    x0, err = bisect_v(f, a=0, b=30, shape=c.shape, tol=tol)
+    np.testing.assert_allclose(x0, np.sqrt(c), atol=tol)
+
+
 def test_fixed_point():
     size = 99
     tol = 1.0E-09

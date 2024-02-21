@@ -24,22 +24,43 @@ from scipy.optimize._minpack_py import _relerr
 
 def bisect_v(fun: callable, a: float, b: float, shape: tuple[int, ...], tol=1.0E-06,
              maxiter=128, print_err=False) -> tuple[np.ndarray, np.ndarray]:
-    """Bisection method on an array.
+    """Bisection method to find a zero of a continuous function [a, b] -> R,
+    such that f(a) < 0 < f(b).
+
+    The method is vectorized, in the sense that it can in a single call find
+    the zeros of several independent real-valued functions with the same input
+    range [a, b].
+    For this purpose, the `fun` argument should be a Python function taking as
+    input a Numpy array of values in [a, b] and returning a Numpy array
+    containing the evaluation of each function for the corresponding input.
+    This is most efficient if the outputs values of all these functions are
+    computed using vectorized Numpy operations as in the example below.
 
     Parameters
     ----------
-    fun : python function returning a number. f must be continuous, and we must have f(a) < 0 < f(b).
+    fun: Python function taking a Numpy array and returning a Numpy array of the same shape.
     a : lower bound of [a, b] interval.
     b : upper bound of [a, b] interval.
-    shape : desired shape of output array; it must be compatible with f.
+    shape : shape of the inputs and ouputs of `fun` and thus of the ouputs of `bisect_v`.
     tol : absolute tolerance.
     maxiter : maximum number of iterations.
     print_err : print or not max error and number of iterations at the end.
 
     Returns
     -------
-    x: zero of f between a and b.
-    err: convergence error.
+    x: Numpy array of the same shape as the inputs and outputs of `fun`
+        The zero of each function.
+    err: Numpy array of the same shape as the inputs and outputs of `fun`
+        The convergence error.
+
+    Example
+    -------
+    >>> c = np.array([1.0, 4.0, 9.0, 16.0])
+    >>> def f(x):
+    ...     return x**2 - c
+    >>> x0, err = bisect_v(f, a=0.0, b=10.0, shape=(4,), tol=1e-10)
+    >>> x0
+    array([1., 2., 3., 4.])
 
     """
     a_ = a * np.ones(shape)
