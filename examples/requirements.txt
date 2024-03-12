@@ -1,4 +1,0 @@
-matplotlib
-pytest
-scikit-learn
-wheel

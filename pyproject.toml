@@ -18,12 +18,11 @@ classifiers = [
 dependencies = [
     "numpy",
     "scipy",
-    "pylint",
 ]
 
 [project.optional-dependencies]
 examples = ["matplotlib", "scikit-learn"]
-test = ["pytest", "scikit-learn"]
+test = ["pytest", "scikit-learn", "pylint"]
 
 [project.urls]
 "Homepage" = "https://github.com/eurobios-mews-labs/pyntb"
