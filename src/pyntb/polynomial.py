@@ -15,6 +15,8 @@
 
 """Analytical root finding with array inputs."""
 
+from __future__ import annotations  # Type annotations for Python 3.7 and 3.8
+
 from typing import Union
 
 import numpy as np

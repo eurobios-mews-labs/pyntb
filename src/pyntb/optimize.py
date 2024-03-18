@@ -15,11 +15,11 @@
 
 """Misc. numeric functions."""
 
+from __future__ import annotations  # Type annotations for Python 3.7 and 3.8
+
 import numpy as np
 from scipy._lib._util import _asarray_validated
 from scipy._lib._util import _lazywhere
-from scipy.optimize._minpack_py import _del2
-from scipy.optimize._minpack_py import _relerr
 
 
 def bisect_v(fun: callable, a: float, b: float, shape: tuple[int, ...], tol=1.0E-06,
@@ -82,6 +82,12 @@ def bisect_v(fun: callable, a: float, b: float, shape: tuple[int, ...], tol=1.0E
         print(f"Bisection max err (abs) : {np.max(err):.2E}; count={count}")
     return x, err
 
+
+def _del2(p0, p1, d):
+    return p0 - np.square(p1 - p0) / d
+
+def _relerr(actual, desired):
+    return (actual - desired) / desired
 
 def _fixed_point_helper(func, x0, args, xtol, maxiter, use_accel):
     """Almost copied from scipy.optimize._minpack_py.py.
