@@ -4,7 +4,15 @@ A toolbox to factorize some code utilities across various projects.
 
 ## Install
 
-To install the package, type ```python3 -m pip install pyntb``` in a terminal.
+The package requires Python 3.7 or above and is available on PyPI:
+```
+python3 -m pip install pyntb
+```
+
+The optional dependencies used in the examples in the Github repository can be installed at the same time by typing instead:
+```
+python3 -m pip install pyntb[examples]
+```
 
 ## Content
 

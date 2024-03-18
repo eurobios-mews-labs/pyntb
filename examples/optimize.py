@@ -37,14 +37,14 @@ def example_bisect_v(n=10):
 
     plt.figure()
     plt.title('Bisection results')
-    plt.plot(c, x0, 'o', label='bisect_1d results')
+    plt.plot(c, x0, 'o', label='bisect_v results')
     plt.plot(c, np.sqrt(c), label='analytic')
     plt.grid(True)
     plt.legend()
 
     plt.figure()
     plt.title('Bisection error')
-    plt.plot(c, err, 'o', label='from bisect_1d')
+    plt.plot(c, err, 'o', label='from bisect_v')
     plt.plot(c, np.abs(x0 - np.sqrt(c)), label='from analytic')
     plt.grid(True)
     plt.legend()
