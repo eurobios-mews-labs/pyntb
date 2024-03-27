@@ -4,9 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Pyntb"
-version = "2023.0.0"
+version = "2024.0.1"
 authors = [
-    {name = "Eurobios Mews Labs", email = "ecieren@eurobios.com"},
+    {name = "Eurobios Mews Labs", email = "emmanuel.cieren@mews-labs.com"},
 ]
 description = "A toolbox to factorize some code utilities across various projects."
 readme = "README.md"
