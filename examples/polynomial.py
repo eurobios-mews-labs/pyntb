@@ -39,18 +39,17 @@ def example_solve_p2_v(n=10):
     c2 = fun(x2)
 
     plt.figure()
-    plt.semilogy(np.abs(c1), 'o', label='first root')
-    plt.semilogy(np.abs(c2), 'o', label='second root')
+    plt.semilogy(np.abs(c1), "o", label="first root")
+    plt.semilogy(np.abs(c2), "o", label="second root")
     plt.grid(True)
     plt.legend()
-    plt.title('Error on root finding (solve_p2_v)')
+    plt.title("Error on root finding (solve_p2_v)")
 
     return
 
 
 def example_solve__cardan_v(n=10):
-    """...
-    """
+    """..."""
 
     p = np.random.randn(n)
     q = np.random.randn(n)
@@ -62,12 +61,12 @@ def example_solve__cardan_v(n=10):
     x1, x2, x3 = _cardan_v(p, q)
 
     plt.figure()
-    plt.semilogy(np.abs(fun(x1)), 'o', label='first root')
-    plt.semilogy(np.abs(fun(x2)), 'o', label='second root')
-    plt.semilogy(np.abs(fun(x3)), 'o', label='third root')
+    plt.semilogy(np.abs(fun(x1)), "o", label="first root")
+    plt.semilogy(np.abs(fun(x2)), "o", label="second root")
+    plt.semilogy(np.abs(fun(x3)), "o", label="third root")
     plt.grid(True)
     plt.legend()
-    plt.title('Error on root finding (_cardan_v)')
+    plt.title("Error on root finding (_cardan_v)")
 
     return
 
@@ -88,21 +87,21 @@ def example_solve_p3_v(n=10):
     x1, x2, x3 = solve_p3_v(a, b, c, d)
 
     plt.figure()
-    plt.semilogy(np.abs(fun(x1)), 'o', label='first root')
-    plt.semilogy(np.abs(fun(x2)), 'o', label='second root')
-    plt.semilogy(np.abs(fun(x3)), 'o', label='third root')
+    plt.semilogy(np.abs(fun(x1)), "o", label="first root")
+    plt.semilogy(np.abs(fun(x2)), "o", label="second root")
+    plt.semilogy(np.abs(fun(x3)), "o", label="third root")
     plt.grid(True)
     plt.legend()
-    plt.title('Error on root finding (solve_p3_v)')
+    plt.title("Error on root finding (solve_p3_v)")
 
     return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import matplotlib
 
-    matplotlib.use('TkAgg')
-    plt.close('all')
+    matplotlib.use("TkAgg")
+    plt.close("all")
 
     example_solve_p2_v()
     example_solve__cardan_v()

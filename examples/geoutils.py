@@ -30,12 +30,12 @@ def example_haversine():
     brest = (48.3905283, -4.4860088)
 
     distance = haversine(paris[0], paris[1], brest[0], brest[1])
-    distance /= 1000.
+    distance /= 1000.0
 
     print(f"The distance between Paris and Brest is {distance:.3f} km.")
 
     return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     example_haversine()

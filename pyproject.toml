@@ -6,10 +6,10 @@ build-backend = "setuptools.build_meta"
 name = "Pyntb"
 version = "2025.0.1"
 authors = [
-    {name = "Mews Labs", email = "emmanuel.cieren@mews-labs.com"},
+    { name = "Mews Labs", email = "emmanuel.cieren@mews-labs.com" },
 ]
 description = "A toolbox to factorize some code utilities across various projects."
-license = "APACHE-2.0"
+license = "APACHE-2.0"a
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
@@ -25,7 +25,7 @@ dependencies = [
 examples = ["matplotlib", "scikit-learn"]
 test = ["pytest", "scikit-learn", "pylint"]
 lint = ["black"]
-dev=["pyntb[examples,test,lint]"]
+dev = ["pyntb[examples,test,lint]"]
 
 [project.urls]
 "Homepage" = "https://github.com/eurobios-mews-labs/pyntb"

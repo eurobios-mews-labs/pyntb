@@ -26,7 +26,7 @@ _nprs = 3141592654
 def test_haversine():
     np.random.seed(_nprs)
     size = 99
-    tol = 1.0E-12
+    tol = 1.0e-12
 
     lat1 = -90 + 180 * np.random.rand(size)
     lat2 = -90 + 180 * np.random.rand(size)

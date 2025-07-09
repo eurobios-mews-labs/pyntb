@@ -22,9 +22,11 @@ from typing import Union
 import numpy as np
 
 
-def solve_p2_v(a: Union[float, np.ndarray], b: Union[float, np.ndarray],
-               c: Union[float, np.ndarray]) \
-        -> tuple[Union[float, np.ndarray], Union[float, np.ndarray]]:
+def solve_p2_v(
+    a: Union[float, np.ndarray],
+    b: Union[float, np.ndarray],
+    c: Union[float, np.ndarray],
+) -> tuple[Union[float, np.ndarray], Union[float, np.ndarray]]:
     """
     Roots of second order polynomial with array as coefficients.
 
@@ -44,23 +46,26 @@ def solve_p2_v(a: Union[float, np.ndarray], b: Union[float, np.ndarray],
     x2: second root (may be complex)
 
     """
-    delta = b**2 - 4. * a * c
+    delta = b**2 - 4.0 * a * c
     i2a = 0.5 / a
-    sqd = np.sqrt(delta + 0J)
+    sqd = np.sqrt(delta + 0j)
     x1 = (-b + sqd) * i2a
     x2 = (-b - sqd) * i2a
 
-    if np.all(np.imag(x1) == 0.):
+    if np.all(np.imag(x1) == 0.0):
         x1 = np.real(x1)
 
-    if np.all(np.imag(x2) == 0.):
+    if np.all(np.imag(x2) == 0.0):
         x2 = np.real(x2)
 
     return x1, x2
 
 
-def _cardan_v(p_: Union[float, np.ndarray], q_: Union[float, np.ndarray]) \
-        -> tuple[Union[float, np.ndarray], Union[float, np.ndarray], Union[float, np.ndarray]]:
+def _cardan_v(
+    p_: Union[float, np.ndarray], q_: Union[float, np.ndarray]
+) -> tuple[
+    Union[float, np.ndarray], Union[float, np.ndarray], Union[float, np.ndarray]
+]:
     """
     Roots of specific third order polynomial with array as coefficients.
 
@@ -82,19 +87,19 @@ def _cardan_v(p_: Union[float, np.ndarray], q_: Union[float, np.ndarray]) \
     p = np.asarray(p_)
     q = np.asarray(q_)
 
-    delta = 4. * p**3 + 27. * q**2
-    sp = np.sqrt(delta / 27.)
-    sm = np.sqrt(delta / 27. + 0J)
+    delta = 4.0 * p**3 + 27.0 * q**2
+    sp = np.sqrt(delta / 27.0)
+    sm = np.sqrt(delta / 27.0 + 0j)
 
-    u = np.where(delta >= 0.,
-                 np.cbrt(0.5 * (-q + sp)),
-                 np.power(0.5 * (-q + sm), 1 / 3))
+    u = np.where(
+        delta >= 0.0, np.cbrt(0.5 * (-q + sp)), np.power(0.5 * (-q + sm), 1 / 3)
+    )
 
-    v = np.where(delta >= 0.,
-                 np.cbrt(0.5 * (-q - sp)),
-                 np.power(0.5 * (-q - sm), 1 / 3))
+    v = np.where(
+        delta >= 0.0, np.cbrt(0.5 * (-q - sp)), np.power(0.5 * (-q - sm), 1 / 3)
+    )
 
-    j1 = 0.5 * (-1. + np.sqrt(3) * 1J)
+    j1 = 0.5 * (-1.0 + np.sqrt(3) * 1j)
     j2 = j1.conjugate()
     x1 = u + v
     x2 = j1 * u + j2 * v
@@ -103,9 +108,14 @@ def _cardan_v(p_: Union[float, np.ndarray], q_: Union[float, np.ndarray]) \
     return np.real(x1), x2, x3
 
 
-def solve_p3_v(a: Union[float, np.ndarray], b: Union[float, np.ndarray],
-               c: Union[float, np.ndarray], d: Union[float, np.ndarray]) \
-        -> tuple[Union[float, np.ndarray], Union[float, np.ndarray], Union[float, np.ndarray]]:
+def solve_p3_v(
+    a: Union[float, np.ndarray],
+    b: Union[float, np.ndarray],
+    c: Union[float, np.ndarray],
+    d: Union[float, np.ndarray],
+) -> tuple[
+    Union[float, np.ndarray], Union[float, np.ndarray], Union[float, np.ndarray]
+]:
     """
     Roots of second order polynomial with array as coefficients.
 
@@ -127,11 +137,11 @@ def solve_p3_v(a: Union[float, np.ndarray], b: Union[float, np.ndarray],
     x3: third root (may be complex)
 
     """
-    p = - (b / a)**2 / 3. + c / a
-    q = (b / (27. * a)) * (2. * (b / a)**2 - 9. * c / a) + d / a
+    p = -((b / a) ** 2) / 3.0 + c / a
+    q = (b / (27.0 * a)) * (2.0 * (b / a) ** 2 - 9.0 * c / a) + d / a
     z1, z2, z3 = _cardan_v(p, q)
 
-    s = b / (3. * a)
+    s = b / (3.0 * a)
     x1 = z1 - s
     x2 = z2 - s
     x3 = z3 - s
