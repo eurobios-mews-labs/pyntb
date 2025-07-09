@@ -18,6 +18,7 @@
 from __future__ import annotations  # Type annotations for Python 3.7 and 3.8
 
 import numpy as np
+import warnings
 from scipy._lib._util import _asarray_validated
 from scipy._lib._util import _lazywhere
 
@@ -114,7 +115,11 @@ def _fixed_point_helper(func, x0, args, xtol, maxiter, use_accel):
             return p
         p0 = p
     msg = f"Failed to converge after {maxiter} iterations, value is {p}"
-    raise RuntimeError(msg)
+    warnings.warn(msg)
+    n = len(p)
+    s = np.sum(np.abs(relerr) < xtol)
+    warnings.warn(f"{s} out of {n} element(s) in input array successfuly converged")
+    return np.where(np.abs(relerr) < xtol, p, np.nan)
 
 
 def fixed_point(func, x0, args=(), xtol=1e-8, maxiter=500, method='del2'):
