@@ -9,7 +9,7 @@ authors = [
     { name = "Mews Labs", email = "emmanuel.cieren@mews-labs.com" },
 ]
 description = "A toolbox to factorize some code utilities across various projects."
-license = "APACHE-2.0"a
+license = "APACHE-2.0"
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
