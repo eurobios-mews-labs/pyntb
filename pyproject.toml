@@ -17,8 +17,8 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "numpy ~= 1.26.4",
-    "scipy ~= 1.15.3",
+    "numpy <= 1.26.4",
+    "scipy <= 1.15.3",
 ]
 
 [project.optional-dependencies]
