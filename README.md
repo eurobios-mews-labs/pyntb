@@ -4,7 +4,7 @@ A toolbox to factorize some code utilities across various projects.
 
 ## Install
 
-The package requires Python 3.7 or above and is available on PyPI:
+The package requires Python 3.9 or above and is available on PyPI:
 
 ```
 python3 -m pip install pyntb
