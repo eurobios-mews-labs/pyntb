@@ -4,7 +4,7 @@ A toolbox to factorize some code utilities across various projects.
 
 ## Install
 
-The package requires Python 3.9 or above and is available on PyPI:
+The package requires Python 3.11 or above and is available on PyPI:
 
 ```
 python3 -m pip install pyntb
@@ -26,7 +26,7 @@ python3 -m pip install pyntb[examples]
     - a copy of `scipy.optimize.fixed_point` that deals with nan values
     - a 2D, quasi-newton algorithm that works with numpy array inputs
 - `polynomial`
-    - find roots of 2nd and 3rd order polymonials with numpy array inputs
+    - find roots of 2nd and 3rd order polynomials with numpy array inputs
 
 ## Examples
 

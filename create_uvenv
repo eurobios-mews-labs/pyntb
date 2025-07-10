@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# -- dir for all envs
+ENV_DIR=${ENV_DIR:-$HOME/ENV}
+mkdir -p $ENV_DIR
+
+# -- current env with link
+VENV=${ENV_DIR}/pyntb-uv
+VLNK=.venv
+ln -sf $VENV $VLNK
+uv venv $VENV --python 3.11
+source $VENV/bin/activate
+
+# -- upgrade pip
+uv pip install --upgrade pip
+
+# -- install local package
+rm -rf build
+uv pip install .[dev]
+
+# -- end text
+echo "---"
+echo -e "\e[1mto start the environment, type :\e[0m"
+echo "source ${VENV}/bin/activate"
+echo ""
+echo -e "\e[1mto stop the environment, type :\e[0m"
+echo "deactivate"

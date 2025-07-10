@@ -4,21 +4,21 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Pyntb"
-version = "2025.0.1"
+version = "2025.0.3"
 authors = [
     { name = "Mews Labs", email = "emmanuel.cieren@mews-labs.com" },
 ]
 description = "A toolbox to factorize some code utilities across various projects."
 license = "APACHE-2.0"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 classifiers = [
     "Programming Language :: Python :: 3 :: Only",
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "numpy <= 1.26.4",
-    "scipy <= 1.15.3",
+    "numpy >= 2.0.1",
+    "scipy >= 1.16.0",
 ]
 
 [project.optional-dependencies]
