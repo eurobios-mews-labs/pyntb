@@ -15,22 +15,21 @@
 
 """Misc. numeric functions."""
 
-from __future__ import annotations  # Type annotations for Python 3.7 and 3.8
+import warnings
 
 import numpy as np
-import warnings
 from scipy._lib._util import _asarray_validated
-from scipy._lib._util import _lazywhere
+from scipy._lib.array_api_extra import apply_where
 
 
 def bisect_v(
-    fun: callable,
-    a: float,
-    b: float,
-    shape: tuple[int, ...],
-    tol=1.0e-06,
-    maxiter=128,
-    print_err=False,
+        fun: callable,
+        a: float,
+        b: float,
+        shape: tuple[int, ...],
+        tol=1.0e-06,
+        maxiter=128,
+        print_err=False,
 ) -> tuple[np.ndarray, np.ndarray]:
     """Bisection method to find a zero of a continuous function [a, b] -> R,
     such that f(a) < 0 < f(b).
@@ -116,10 +115,10 @@ def _fixed_point_helper(func, x0, args, xtol, maxiter, use_accel):
         if use_accel:
             p2 = func(p1, *args)
             d = p2 - 2.0 * p1 + p0
-            p = _lazywhere(d != 0, (p0, p1, d), f=_del2, fillvalue=p2)
+            p = apply_where(d != 0, (p0, p1, d), _del2, fill_value=p2)
         else:
             p = p1
-        relerr = _lazywhere(p0 != 0, (p, p0), f=_relerr, fillvalue=p)
+        relerr = apply_where(p0 != 0, (p, p0), _relerr, fill_value=p)
         if np.nanmax(np.abs(relerr)) < xtol:
             return p
         p0 = p
@@ -165,14 +164,14 @@ def fixed_point(func, x0, args=(), xtol=1e-8, maxiter=500, method="del2"):
 
 
 def qnewt2d_v(
-    f1: callable,
-    f2: callable,
-    x0: np.ndarray,
-    y0: np.ndarray,
-    rtol=1.0e-12,
-    maxiter=64,
-    dx=1.0e-03,
-    dy=1.0e-03,
+        f1: callable,
+        f2: callable,
+        x0: np.ndarray,
+        y0: np.ndarray,
+        rtol=1.0e-12,
+        maxiter=64,
+        dx=1.0e-03,
+        dy=1.0e-03,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """
     Two-dimensional quasi-Newton with arrays.
