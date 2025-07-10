@@ -18,7 +18,7 @@
 import numpy as np
 
 
-def haversine(lat1, lon1, lat2, lon2, r=6.371E+06):
+def haversine(lat1, lon1, lat2, lon2, r=6.371e06):
     """Haversine distance.
 
     Estimate distance between to gps points using the haversine formula (see
@@ -52,6 +52,6 @@ def haversine(lat1, lon1, lat2, lon2, r=6.371E+06):
     p2 = np.radians(lat2)
     dp = np.radians(lat2 - lat1)
     dl = np.radians(lon2 - lon1)
-    a = np.sin(0.5 * dp)**2 + np.cos(p1) * np.cos(p2) * np.sin(0.5 * dl)**2
+    a = np.sin(0.5 * dp) ** 2 + np.cos(p1) * np.cos(p2) * np.sin(0.5 * dl) ** 2
     c = np.arctan2(np.sqrt(a), np.sqrt(1 - a))
     return 2 * r * c

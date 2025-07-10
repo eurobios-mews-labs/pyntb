@@ -25,7 +25,7 @@ _nprs = 3141592654
 def test_bisect():
     np.random.seed(_nprs)
     size = 99
-    tol = 1.0E-09
+    tol = 1.0e-09
 
     c = np.linspace(1, size, size) + np.random.randn(size)
     c = np.abs(c)
@@ -35,8 +35,15 @@ def test_bisect():
 
     r0 = np.sqrt(c)
 
-    x0, err = bisect_v(fun, 0., np.sqrt(np.max(c)) * 1.1, (size,), print_err=False,
-                       tol=tol, maxiter=99)
+    x0, err = bisect_v(
+        fun,
+        0.0,
+        np.sqrt(np.max(c)) * 1.1,
+        (size,),
+        print_err=False,
+        tol=tol,
+        maxiter=99,
+    )
 
     assert np.max(np.abs(x0 - r0) <= np.minimum(tol, err))
 
@@ -52,7 +59,7 @@ def test_bisect_scalar():
 
 def test_bisect_vector():
     def f(x):
-        return np.array([x[0]**2-2, x[1]**3-2])
+        return np.array([x[0] ** 2 - 2, x[1] ** 3 - 2])
         # Not the best way to use bisect_v, but just for testing.
 
     tol = 1e-6
@@ -62,6 +69,7 @@ def test_bisect_vector():
 
 def test_bisect_array():
     c = np.arange(27).reshape(3, 3, 3)
+
     def f(x):
         return x**2 - c
 
@@ -72,7 +80,7 @@ def test_bisect_array():
 
 def test_fixed_point():
     size = 99
-    tol = 1.0E-09
+    tol = 1.0e-09
 
     c = 1 + np.sqrt(np.linspace(1, 10, size))
 
@@ -87,7 +95,7 @@ def test_fixed_point():
 def test_qnewt2d():
     np.random.seed(_nprs)
     size = 99
-    tol = 1.0E-12
+    tol = 1.0e-12
 
     a = np.abs(1 + np.random.randn(size))
     b = np.abs(1 + np.random.randn(size))
@@ -100,7 +108,10 @@ def test_qnewt2d():
 
     xg = np.ones((size,))
     yg = np.ones((size,))
-    x, y, count, err = qnewt2d_v(f1, f2, xg, yg, rtol=tol, maxiter=999, dx=1.0E-09, dy=1.0E-09)
+    x, y, count, err = qnewt2d_v(
+        f1, f2, xg, yg, rtol=tol, maxiter=999, dx=1.0e-09, dy=1.0e-09
+    )
 
-    assert np.logical_and(np.max(np.abs(f1(x, y))) < tol,
-                          np.max(np.abs(f2(x, y))) < tol)
+    assert np.logical_and(
+        np.max(np.abs(f1(x, y))) < tol, np.max(np.abs(f2(x, y))) < tol
+    )

@@ -33,19 +33,19 @@ def example_bisect_v(n=10):
     def fun(x):
         return x**2 - c
 
-    x0, err = bisect_v(fun, 0., np.sqrt(n) + 1., (n,), print_err=True)
+    x0, err = bisect_v(fun, 0.0, np.sqrt(n) + 1.0, (n,), print_err=True)
 
     plt.figure()
-    plt.title('Bisection results')
-    plt.plot(c, x0, 'o', label='bisect_v results')
-    plt.plot(c, np.sqrt(c), label='analytic')
+    plt.title("Bisection results")
+    plt.plot(c, x0, "o", label="bisect_v results")
+    plt.plot(c, np.sqrt(c), label="analytic")
     plt.grid(True)
     plt.legend()
 
     plt.figure()
-    plt.title('Bisection error')
-    plt.plot(c, err, 'o', label='from bisect_v')
-    plt.plot(c, np.abs(x0 - np.sqrt(c)), label='from analytic')
+    plt.title("Bisection error")
+    plt.plot(c, err, "o", label="from bisect_v")
+    plt.plot(c, np.abs(x0 - np.sqrt(c)), label="from analytic")
     plt.grid(True)
     plt.legend()
 
@@ -64,7 +64,7 @@ def example_fixed_point(n=8, put_nan=True):
     c = 1 + np.sqrt(np.linspace(1, n, n))
     if put_nan:
         c[n // 2] = np.nan
-    x = np.linspace(0., np.pi, 101)
+    x = np.linspace(0.0, np.pi, 101)
 
     def fun(x):
         return np.sin(c * x)
@@ -74,19 +74,21 @@ def example_fixed_point(n=8, put_nan=True):
     try:
         x0 = fixed_point_scipy(fun, 0.5)
     except RuntimeError:
-        print("Error in scipy (RuntimeError due to nans in input array), "
-              "using fixed_point from pyntb")
+        print(
+            "Error in scipy (RuntimeError due to nans in input array), "
+            "using fixed_point from pyntb"
+        )
         x0 = fixed_point(fun, 0.5)
 
     plt.figure()
-    plt.plot(x, x, ls='--', c='gray')
+    plt.plot(x, x, ls="--", c="gray")
     for i in range(n):
         plt.plot(x, np.sin(c[i] * x))
-    plt.plot(x0, x0, ls=None, marker='o', c='gray')
+    plt.plot(x0, x0, ls=None, marker="o", c="gray")
     plt.xlim([0, 1])
     plt.ylim([0, 1])
     plt.grid(True)
-    plt.title('Fixed point results')
+    plt.title("Fixed point results")
 
     return
 
@@ -113,21 +115,21 @@ def example_qnewt2d_v(n=10):
     x, y, count, err = qnewt2d_v(f1, f2, xg, yg)
 
     plt.figure()
-    plt.semilogy(err, ls='None', marker='o', label='qnewt2d_v err')
-    plt.semilogy(np.abs(f1(x, y)), ls='None', marker='.', label='real err on f1')
-    plt.semilogy(np.abs(f2(x, y)), ls='None', marker='.', label='real err on f2')
+    plt.semilogy(err, ls="None", marker="o", label="qnewt2d_v err")
+    plt.semilogy(np.abs(f1(x, y)), ls="None", marker=".", label="real err on f1")
+    plt.semilogy(np.abs(f2(x, y)), ls="None", marker=".", label="real err on f2")
     plt.grid(True)
     plt.legend()
-    plt.title('Errors on qnewt2d_v')
+    plt.title("Errors on qnewt2d_v")
 
     return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import matplotlib
 
-    matplotlib.use('TkAgg')
-    plt.close('all')
+    matplotlib.use("TkAgg")
+    plt.close("all")
 
     example_bisect_v()
     example_fixed_point()

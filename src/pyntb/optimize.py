@@ -18,12 +18,20 @@
 from __future__ import annotations  # Type annotations for Python 3.7 and 3.8
 
 import numpy as np
+import warnings
 from scipy._lib._util import _asarray_validated
 from scipy._lib._util import _lazywhere
 
 
-def bisect_v(fun: callable, a: float, b: float, shape: tuple[int, ...], tol=1.0E-06,
-             maxiter=128, print_err=False) -> tuple[np.ndarray, np.ndarray]:
+def bisect_v(
+    fun: callable,
+    a: float,
+    b: float,
+    shape: tuple[int, ...],
+    tol=1.0e-06,
+    maxiter=128,
+    print_err=False,
+) -> tuple[np.ndarray, np.ndarray]:
     """Bisection method to find a zero of a continuous function [a, b] -> R,
     such that f(a) < 0 < f(b).
 
@@ -86,8 +94,10 @@ def bisect_v(fun: callable, a: float, b: float, shape: tuple[int, ...], tol=1.0E
 def _del2(p0, p1, d):
     return p0 - np.square(p1 - p0) / d
 
+
 def _relerr(actual, desired):
     return (actual - desired) / desired
+
 
 def _fixed_point_helper(func, x0, args, xtol, maxiter, use_accel):
     """Almost copied from scipy.optimize._minpack_py.py.
@@ -114,10 +124,14 @@ def _fixed_point_helper(func, x0, args, xtol, maxiter, use_accel):
             return p
         p0 = p
     msg = f"Failed to converge after {maxiter} iterations, value is {p}"
-    raise RuntimeError(msg)
+    warnings.warn(msg)
+    n = len(p)
+    s = np.sum(np.abs(relerr) < xtol)
+    warnings.warn(f"{s} out of {n} element(s) in input array successfuly converged")
+    return np.where(np.abs(relerr) < xtol, p, np.nan)
 
 
-def fixed_point(func, x0, args=(), xtol=1e-8, maxiter=500, method='del2'):
+def fixed_point(func, x0, args=(), xtol=1e-8, maxiter=500, method="del2"):
     """
     Find a fixed point of the function (copied from
     scipy.optimize._minpack_py.py in order to handle nans).
@@ -145,14 +159,21 @@ def fixed_point(func, x0, args=(), xtol=1e-8, maxiter=500, method='del2'):
         accelerate the convergence.
 
     """
-    use_accel = {'del2': True, 'iteration': False}[method]
+    use_accel = {"del2": True, "iteration": False}[method]
     x0 = _asarray_validated(x0, as_inexact=True)
     return _fixed_point_helper(func, x0, args, xtol, maxiter, use_accel)
 
 
-def qnewt2d_v(f1: callable, f2: callable, x0: np.ndarray, y0: np.ndarray,
-              rtol=1.0E-12, maxiter=64, dx=1.0E-03, dy=1.0E-03) \
-        -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+def qnewt2d_v(
+    f1: callable,
+    f2: callable,
+    x0: np.ndarray,
+    y0: np.ndarray,
+    rtol=1.0e-12,
+    maxiter=64,
+    dx=1.0e-03,
+    dy=1.0e-03,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """
     Two-dimensional quasi-Newton with arrays.
 
@@ -183,7 +204,7 @@ def qnewt2d_v(f1: callable, f2: callable, x0: np.ndarray, y0: np.ndarray,
     err: relative error when exiting the function
 
     """
-    err = 1.
+    err = 1.0
     count = 0
     x = x0.copy()
     y = y0.copy()
@@ -194,7 +215,7 @@ def qnewt2d_v(f1: callable, f2: callable, x0: np.ndarray, y0: np.ndarray,
         Jb = 0.5 * (f1(x, y + dy) - f1(x, y - dy)) / dy
         Jc = 0.5 * (f2(x + dx, y) - f2(x - dx, y)) / dx
         Jd = 0.5 * (f2(x, y + dy) - f2(x, y - dy)) / dy
-        di = 1. / (Ja * Jd - Jb * Jc)
+        di = 1.0 / (Ja * Jd - Jb * Jc)
         ex = di * (Jd * F1 - Jb * F2)
         ey = di * (Ja * F2 - Jc * F1)
         x -= ex
