@@ -23,13 +23,13 @@ from scipy._lib.array_api_extra import apply_where
 
 
 def bisect_v(
-        fun: callable,
-        a: float,
-        b: float,
-        shape: tuple[int, ...],
-        tol=1.0e-06,
-        maxiter=128,
-        print_err=False,
+    fun: callable,
+    a: float,
+    b: float,
+    shape: tuple[int, ...],
+    tol=1.0e-06,
+    maxiter=128,
+    print_err=False,
 ) -> tuple[np.ndarray, np.ndarray]:
     """Bisection method to find a zero of a continuous function [a, b] -> R,
     such that f(a) < 0 < f(b).
@@ -164,14 +164,14 @@ def fixed_point(func, x0, args=(), xtol=1e-8, maxiter=500, method="del2"):
 
 
 def qnewt2d_v(
-        f1: callable,
-        f2: callable,
-        x0: np.ndarray,
-        y0: np.ndarray,
-        rtol=1.0e-12,
-        maxiter=64,
-        dx=1.0e-03,
-        dy=1.0e-03,
+    f1: callable,
+    f2: callable,
+    x0: np.ndarray,
+    y0: np.ndarray,
+    rtol=1.0e-12,
+    maxiter=64,
+    dx=1.0e-03,
+    dy=1.0e-03,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """
     Two-dimensional quasi-Newton with arrays.
